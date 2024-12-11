@@ -1,11 +1,20 @@
-name: CI Test
+name: Deploy to GitHub Pages
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check YAML validity
-        run: echo "GitHub Actions is working correctly!"
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build and Deploy
+        run: |
+          npm install
+          npm run build
+          npm run deploy

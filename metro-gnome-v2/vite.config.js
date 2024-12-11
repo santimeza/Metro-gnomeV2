@@ -6,5 +6,6 @@ export default defineConfig({
   plugins: [react()],
   base: '/Metro-gnomeV2',
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+  },
 })
