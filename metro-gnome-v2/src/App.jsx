@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import Home from "./Home";
+import BpmControl from "./components/BpmControl";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [bpm, setBpm] = useState(60);
+  const [clickSound, setClickSound] = useState('default');
+  const [timeSignature, setTimeSignature] = useState('4/4');
+  const [polyrhythm, setPolyrhythm] = useState({ first: 3, second: 4 });
+  const [accelerandoSettings, setAccelerandoSettings] = useState({
+    startBpm: 60,
+    endBpm: 120,
+    leadInMeasures: 4,
+    totalMeasures: 16,
+  });
+
+  useEffect(() => {
+    console.log('bpm changed: ', bpm);
+  }, [bpm]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Hello!</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      <Home />
+      <BpmControl bpm={bpm} setBpm={setBpm} />
 
-export default App
+      {/* <BpmControl bpm={bpm} setBpm={setBpm} />
+      <ClickSoundSelector clickSound={clickSound} setClickSound={setClickSound} />
+      <TimeSignature timeSignature={timeSignature} setTimeSignature={setTimeSignature} />
+      <PolyrhythmVisualizer polyrhythm={polyrhythm} setPolyrhythm={setPolyrhythm} />
+      <AccelerandoRitardando settings={accelerandoSettings} setSettings={setAccelerandoSettings} />
+      <Metronome bpm={bpm} clickSound={clickSound} timeSignature={timeSignature} /> */}
+    </div>
+  );
+};
+
+export default App;
