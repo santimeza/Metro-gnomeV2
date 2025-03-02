@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+
 import Home from "./Home";
 import BpmControl from "./components/BpmControl";
+import Metronome from "./components/Metronome";
 
 const App = () => {
   const [bpm, setBpm] = useState(60);
-  const [clickSound, setClickSound] = useState('default');
-  const [timeSignature, setTimeSignature] = useState('4/4');
+  const [clickSound, setClickSound] = useState("default");
+  const [timeSignature, setTimeSignature] = useState("4/4");
   const [polyrhythm, setPolyrhythm] = useState({ first: 3, second: 4 });
   const [accelerandoSettings, setAccelerandoSettings] = useState({
     startBpm: 60,
@@ -15,13 +17,14 @@ const App = () => {
   });
 
   useEffect(() => {
-    console.log('bpm changed: ', bpm);
+    console.log("bpm changed: ", bpm);
   }, [bpm]);
 
   return (
     <div>
       <Home />
       <BpmControl bpm={bpm} setBpm={setBpm} />
+      <Metronome bpm={bpm} />
 
       {/* <BpmControl bpm={bpm} setBpm={setBpm} />
       <ClickSoundSelector clickSound={clickSound} setClickSound={setClickSound} />
