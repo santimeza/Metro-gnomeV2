@@ -6,11 +6,18 @@ const Pendulum = ({ bpm, isPlaying }) => {
 
   useEffect(() => {
     if (pendulumRef.current) {
-      const swingDuration = 60 / bpm; // Calculate swing duration based on BPM
+      const swingDuration = (60 / bpm) * 2; // Double the swing duration to halve the speed
       pendulumRef.current.style.animationDuration = `${swingDuration}s`;
-      pendulumRef.current.style.animationPlayState = isPlaying
-        ? "running"
-        : "paused";
+
+      if (isPlaying) {
+        // Reset animation to ensure it starts consistently
+        pendulumRef.current.style.animation = "none";
+        void pendulumRef.current.offsetWidth; // Trigger reflow
+        pendulumRef.current.style.animation = `swing ${swingDuration}s infinite ease-in-out`;
+        pendulumRef.current.style.animationPlayState = "running";
+      } else {
+        pendulumRef.current.style.animationPlayState = "paused";
+      }
     }
   }, [bpm, isPlaying]);
 

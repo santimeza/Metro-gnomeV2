@@ -12,19 +12,31 @@
   height: 100px;
   background-color: #007bff;
   position: absolute;
-  bottom: 0; /* Change point of rotation to the bottom */
-  transform-origin: bottom center; /* Change point of rotation to the bottom */
+  top: 0;
+  transform-origin: top center;
   animation: swing infinite ease-in-out;
+}
+
+.pendulum::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: #007bff;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -10px; /* Adjust to position the sphere at the end */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @keyframes swing {
   0% {
-    transform: rotate(-30deg);
+    transform: rotate(-35deg);
   }
   50% {
-    transform: rotate(30deg);
+    transform: rotate(35deg);
   }
   100% {
-    transform: rotate(-30deg);
+    transform: rotate(-35deg);
   }
 }
