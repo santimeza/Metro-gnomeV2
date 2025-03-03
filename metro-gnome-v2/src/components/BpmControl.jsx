@@ -1,12 +1,11 @@
 import React from "react";
 
-const BpmControl = ({ bpm, setBpm }) => {
-  const handleDecrease = () => {
-    setBpm((prevBpm) => Math.max(prevBpm - 1, 0)); // Ensure BPM doesn't go below 0
-  };
-
-  const handleIncrease = () => {
-    setBpm((prevBpm) => prevBpm + 1);
+const BpmControl = ({ bpm, onIncrease, onDecrease, setBpm, togglePlay }) => {
+  const handleInputChange = (e) => {
+    const newBpm = Number(e.target.value);
+    if (newBpm >= 0 && newBpm <= 300) {
+      setBpm(newBpm);
+    }
   };
 
   return (
@@ -21,24 +20,33 @@ const BpmControl = ({ bpm, setBpm }) => {
                   class="input"
                   type="number"
                   value={bpm}
-                  onChange={(e) => setBpm(Number(e.target.value))}
+                  onChange={handleInputChange}
                 ></input>
                 <button
                   type="button"
                   className="button is-primary"
-                  onClick={handleDecrease}
+                  onClick={onDecrease}
                 >
                   -
                 </button>
                 <button
                   type="button"
                   className="button is-primary"
-                  onClick={handleIncrease}
+                  onClick={onIncrease}
                 >
                   +
                 </button>
               </div>
             </div>
+          </div>
+          <div class="field">
+            <button
+              type="button"
+              className="button is-success is-fullwidth"
+              onClick={togglePlay}
+            >
+              Play/Pause
+            </button>
           </div>
         </form>
       </div>

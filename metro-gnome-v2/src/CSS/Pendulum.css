@@ -1,0 +1,30 @@
+.pendulum-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 100%; /* Ensure the container takes the full width */
+  position: relative;
+}
+
+.pendulum {
+  width: 10px;
+  height: 100px;
+  background-color: #007bff;
+  position: absolute;
+  bottom: 0; /* Change point of rotation to the bottom */
+  transform-origin: bottom center; /* Change point of rotation to the bottom */
+  animation: swing infinite ease-in-out;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(-30deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(-30deg);
+  }
+}

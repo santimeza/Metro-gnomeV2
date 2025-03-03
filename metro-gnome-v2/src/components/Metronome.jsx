@@ -1,7 +1,6 @@
-// Metronome.jsx
 import React, { useEffect, useRef, useState } from "react";
 
-const Metronome = ({ bpm }) => {
+const Metronome = ({ bpm, isPlaying }) => {
   const audioContextRef = useRef(
     new (window.AudioContext || window.webkitAudioContext)()
   );
@@ -38,31 +37,18 @@ const Metronome = ({ bpm }) => {
     source.start(0);
   };
 
-  return (
-    <div>
-      <button
-        type="button"
-        className="button is-primary"
-        onClick={() => playClick("click1")}
-      >
-        Play Click 1
-      </button>
-      <button
-        type="button"
-        className="button is-primary"
-        onClick={() => playClick("click2")}
-      >
-        Play Click 2
-      </button>
-      <button
-        type="button"
-        className="button is-primary"
-        onClick={() => playClick("click3")}
-      >
-        Play Click 3
-      </button>
-    </div>
-  );
+  useEffect(() => {
+    if (isPlaying) {
+      const interval = 60000 / bpm;
+      const timer = setInterval(() => {
+        playClick("click1");
+      }, interval);
+
+      return () => clearInterval(timer);
+    }
+  }, [bpm, isPlaying, clickBuffers]);
+
+  return <div>{/* Metronome logic only */}</div>;
 };
 
 export default Metronome;
